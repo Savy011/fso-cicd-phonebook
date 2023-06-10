@@ -1,0 +1,19 @@
+.add {
+	text-align: center;
+	border-radius: 5px;
+	padding: 10px;
+	font-size: 1.5rem;
+	background-color: lightgray;
+	color: green;
+	border: green solid 3px;
+}
+
+.delete {
+	text-align: center;
+	border-radius: 5px;
+	padding: 10px;
+	font-size: 1.5rem;
+	background-color: lightgray;
+	color: red;
+	border: red solid 3px;
+}

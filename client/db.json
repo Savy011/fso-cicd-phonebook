@@ -1,0 +1,44 @@
+{
+    "contacts": [
+        {
+            "id": 1,
+            "name": "Savy",
+            "number": 9876543210
+        },
+        {
+            "id": 2,
+            "name": "Mars",
+            "number": 8247326343
+        },
+        {
+            "id": 3,
+            "name": "Ally",
+            "number": 7814365174
+        },
+        {
+            "id": 4,
+            "name": "Divy",
+            "number": 2467831321
+        },
+        {
+            "id": 5,
+            "name": "Rory",
+            "number": 1847124678
+        },
+        {
+            "id": 6,
+            "name": "Phoebe",
+            "number": 1234567890
+        },
+        {
+            "id": 7,
+            "name": "Derik",
+            "number": 9876512340
+        },
+        {
+            "id": 8,
+            "name": "Ruben",
+            "number": 9018273645
+        }
+    ]
+}
