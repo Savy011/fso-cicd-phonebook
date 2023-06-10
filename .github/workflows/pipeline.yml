@@ -30,4 +30,7 @@ jobs:
       - name: server dir check
         working-directory: ./server
         run: ls
+      - name: server build dir check
+        working-directory: ./server/build
+        run: ls -a
 
