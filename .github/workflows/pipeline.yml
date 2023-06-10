@@ -33,3 +33,39 @@ jobs:
       - name: Check styles
         working-directory: ./server
         run: npm run lint
+  
+  deployment-and-tag-release:
+    needs: [pre-deployment-checks]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout Branch
+        uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install client dependencies
+        working-directory: ./client
+        run: npm install
+      - name: Build client
+        working-directory: ./client
+        run: npm run build
+      - name:  Move build directory to server
+        working-directory: ./client
+        run: cp -r ./build ../server/build
+      - name: Setting Up Deployment
+        if:  ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Deploying to fly.io
+        if: ${{ github.event_name == 'push'  && !contains(github.event.head_commit.message, '#skip') }}
+        working-directory: ./server
+        run: flyctl deploy --remote-only --ha=false
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      - name: Bumping version and push tag
+        if: ${{ success() && github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
+        uses: anothrNick/github-tag-action@c360518fb8131e99795f8208f8a6105ceca55ec2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+        
