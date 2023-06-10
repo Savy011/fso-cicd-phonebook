@@ -9,19 +9,23 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  pre-depolyment-checks:
+  pre-depl0yment-checks:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
       - name: Setup node
         uses: actions/setup-node@v3
-      - working-directory: ./client
-        run: ls
       - name: Install client dependencies
         working-directory: ./client
         run: npm install
-      - name: Build
+      - name: Build client
         working-directory: ./client
         run: npm run build
-      - run: ls
+      - name:  Move build directory to server
+        working-directory: ./client
+        run: cp build ../build
+      - name: server dir check
+        working-directory: ./server
+        run: ls
+
